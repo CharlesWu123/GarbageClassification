@@ -1,0 +1,10 @@
+timm==0.4.12
+opencv-python==4.4.0.46
+termcolor==1.1.0
+yacs==0.1.8
+tensorboard
+openpyxl
+tqdm
+ml-collections
+#cd kernels/window_process
+#python setup.py install #--user

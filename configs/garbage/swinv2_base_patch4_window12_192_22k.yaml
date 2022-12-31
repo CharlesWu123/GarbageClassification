@@ -1,0 +1,48 @@
+OUTPUT: '/mnt/trained_model'
+PRINT_FREQ: 50
+DATA:
+  BATCH_SIZE: 32
+  DATA_PATH: '/teams/2221AI13_1666364726/garbage'
+  DATASET: 'garbage'
+  IMG_SIZE: 192
+  INTERPOLATION: 'bicubic'
+MODEL:
+  TYPE: swinv2
+  NAME: swinv2_base_patch4_window12_192_22k
+  PRETRAINED: '/mnt/pretrained_model/swinv2_base_patch4_window12_192_22k.pth'
+  RESUME: ''
+  NUM_CLASSES: 248
+  DROP_PATH_RATE: 0.5
+  SWINV2:
+    EMBED_DIM: 128
+    DEPTHS: [ 2, 2, 18, 2 ]
+    NUM_HEADS: [ 4, 8, 16, 32 ]
+    WINDOW_SIZE: 12
+TRAIN:
+  EPOCHS: 50
+  WARMUP_EPOCHS: 10
+  WEIGHT_DECAY: 0.05
+  BASE_LR: 5e-4
+  WARMUP_LR: 5e-7
+  USE_CHECKPOINT: false
+  LR_SCHEDULER:
+    NAME: 'cosine'
+    DECAY_EPOCHS: 30
+    DECAY_RATE: 0.1
+  OPTIMIZER:
+    NAME: 'adamw'
+    EPS: 1e-8
+    BETAS: (0.9, 0.999)
+    MOMENTUM: 0.9
+AUG:
+  COLOR_JITTER: 0.4
+  AUTO_AUGMENT: 'rand-m9-mstd0.5-inc1'
+  REPROB: 0.25
+  REMODE: 'pixel'
+  RECOUNT: 1
+  MIXUP: 0.0
+  CUTMIX: 0.0
+  CUTMIX_MINMAX: None
+  MIXUP_PROB: 0.8
+  MIXUP_SWITCH_PROB: 0.5
+  MIXUP_MODE: 'batch'
